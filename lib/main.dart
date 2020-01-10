@@ -1,3 +1,4 @@
+import 'package:blog_flutter/SignUp.dart';
 import 'package:blog_flutter/services/auth.dart';
 import 'package:flutter/material.dart';
 
@@ -74,13 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: RaisedButton(
-        child: Text('sign in anon'),
-        onPressed: () async {
-          dynamic result = await authService.signInAnon();
-
-        },
-      )
+      body: SignUp(),
     );
   }
 }
