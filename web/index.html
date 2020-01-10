@@ -5,6 +5,32 @@
   <title>blog_flutter</title>
 </head>
 <body>
-  <script src="main.dart.js" type="application/javascript"></script>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-auth.js"></script>
+
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+
+  <script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCeJJV5juKgxekhSKNLE5o-iOMPPxoVBBI",
+    authDomain: "plusmobileapps-blog.firebaseapp.com",
+    databaseURL: "https://plusmobileapps-blog.firebaseio.com",
+    projectId: "plusmobileapps-blog",
+    storageBucket: "plusmobileapps-blog.appspot.com",
+    messagingSenderId: "647008545206",
+    appId: "1:647008545206:web:e9eef36540068f6f"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+  <script defer src="main.dart.js" type="application/javascript"></script>
+
 </body>
 </html>
