@@ -90,6 +90,18 @@ class _SignUpState extends State<SignUp> {
                    print(result.uid);
                  }
               },
+            ),
+            RaisedButton(
+              child: Text('Sign in with google'),
+              onPressed: () async {
+                User result = await _authService.signInWithGoogle();
+                if(result == null) {
+                  print('error signing in');
+                } else {
+                  print('signed in');
+                  print(result.uid);
+                }
+              },
             )
           ],
         ),

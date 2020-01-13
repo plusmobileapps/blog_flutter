@@ -1,9 +1,11 @@
 import 'package:blog_flutter/model/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   User _userFromFirebaseUser(FirebaseUser user) {
     return user != null ? User(uid: user.uid, displayName: user.displayName ?? 'Anon') : null;
@@ -36,6 +38,17 @@ class AuthService {
       print(e.toString());
       return null;
     }
+  }
+
+  Future<User> signInWithGoogle() async {
+    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.getCredential(idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
+
+    final FirebaseUser user = (await _auth.signInWithCredential(credential)).user;
+    print('Signed in with Google');
+    return _userFromFirebaseUser(user);
   }
 
   //register with email and password
