@@ -1,3 +1,5 @@
+import 'package:blog_flutter/components/home_feed_card.dart';
+import 'package:blog_flutter/model/article.dart';
 import 'package:blog_flutter/model/user.dart';
 import 'package:blog_flutter/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -7,15 +9,6 @@ import 'SignUp.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -28,11 +21,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
       _counter++;
     });
   }
@@ -42,22 +30,26 @@ class _MyHomePageState extends State<MyHomePage> {
     var user = Provider.of<User>(context);
     print('User is: $user');
     bool isLoggedIn = user != null;
-    String toolbarText = user != null ? 'Hi ${user.displayName}' : 'Sign in/Sign up';
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    Article article = Article(id: 'some id', description: 'This is an article description', minRead: '7 min read', title: "The amazing article title");
+
     return Scaffold(
       drawer: Drawer(
         child: Column(
           children: <Widget>[
-            if (isLoggedIn) ...[
+            if(isLoggedIn)...[
               RaisedButton(
                 child: Text('Sign out'),
                 onPressed: () => AuthService().signOut(),
               )
+            ],
+
+            if(!isLoggedIn)...[
+              RaisedButton(
+                child: Text('Login/Sign Up'),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
+                },
+              ),
             ],
           ],
         ),
@@ -71,15 +63,33 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Icon(Icons.person),
-                Text(toolbarText),
+                if(!isLoggedIn) ...[
+                  Icon(Icons.person_outline),
+                  Text('Login/Sign Up')
+                ],
+
+                if(isLoggedIn)...[
+                  Icon(Icons.person),
+                  Text('Hi ${user.displayName}')
+                ]
+
               ],
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
+            },
           ),
         ],
       ),
-      body: SignUp(),
+      body: GridView.count(
+        // Create a grid with 2 columns. If you change the scrollDirection to
+        // horizontal, this produces 2 rows.
+        crossAxisCount: 2,
+        // Generate 100 widgets that display their index in the List.
+        children: List.generate(100, (index) {
+          return HomeFeedCard(article: article,);
+        }),
+      ),
     );
   }
 }
