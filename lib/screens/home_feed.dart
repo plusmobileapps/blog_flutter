@@ -1,6 +1,8 @@
+import 'package:blog_flutter/components/BlogScaffold.dart';
 import 'package:blog_flutter/components/home_feed_card.dart';
 import 'package:blog_flutter/model/article.dart';
 import 'package:blog_flutter/model/user.dart';
+import 'package:blog_flutter/components/nav_drawer.dart';
 import 'package:blog_flutter/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,56 +33,8 @@ class _MyHomePageState extends State<MyHomePage> {
     print('User is: $user');
     bool isLoggedIn = user != null;
     Article article = Article(id: 'some id', description: 'This is an article description', minRead: '7 min read', title: "The amazing article title");
-
-    return Scaffold(
-      drawer: Drawer(
-        child: Column(
-          children: <Widget>[
-            if(isLoggedIn)...[
-              RaisedButton(
-                child: Text('Sign out'),
-                onPressed: () => AuthService().signOut(),
-              )
-            ],
-
-            if(!isLoggedIn)...[
-              RaisedButton(
-                child: Text('Login/Sign Up'),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
-                },
-              ),
-            ],
-          ],
-        ),
-      ),
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-        actions: <Widget>[
-          FlatButton(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                if(!isLoggedIn) ...[
-                  Icon(Icons.person_outline),
-                  Text('Login/Sign Up')
-                ],
-
-                if(isLoggedIn)...[
-                  Icon(Icons.person),
-                  Text('Hi ${user.displayName}')
-                ]
-
-              ],
-            ),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
-            },
-          ),
-        ],
-      ),
+    return BlogScaffold(
+      title: 'Plus Mobile Apps',
       body: GridView.count(
         // Create a grid with 2 columns. If you change the scrollDirection to
         // horizontal, this produces 2 rows.

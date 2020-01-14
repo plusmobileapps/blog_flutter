@@ -1,6 +1,6 @@
+import 'package:blog_flutter/components/BlogScaffold.dart';
 import 'package:blog_flutter/model/user.dart';
 import 'package:flutter/material.dart';
-
 import '../services/auth.dart';
 
 class SignUp extends StatefulWidget {
@@ -16,23 +16,10 @@ class _SignUpState extends State<SignUp> {
   String email = '';
   String password = '';
 
-//
-//  SignUpState({Key key}) : super
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        drawer: Drawer(
-          child: Column(
-            children: <Widget>[],
-          ),
-        ),
-        appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: Text('Login/Sign up'),
-          actions: <Widget>[],
-        ),
+    return BlogScaffold(
+        title: 'Login/Sign up',
         body: Center(
           child: Column(
             children: <Widget>[
@@ -41,7 +28,8 @@ class _SignUpState extends State<SignUp> {
                 child: Column(
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(16.0, 32.0, 16.0, 16.0),
+                      padding:
+                          const EdgeInsets.fromLTRB(16.0, 32.0, 16.0, 16.0),
                       child: Container(
                         width: 300.0,
                         child: TextField(
@@ -76,7 +64,6 @@ class _SignUpState extends State<SignUp> {
                   ],
                 ),
               ),
-
               RaisedButton(
                 child: Text('Login'),
                 onPressed: () async {
@@ -90,7 +77,6 @@ class _SignUpState extends State<SignUp> {
                   }
                 },
               ),
-
               RaisedButton(
                 child: Text('Sign up with email'),
                 onPressed: () async {
