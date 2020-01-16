@@ -9,18 +9,21 @@ class HomeFeedCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.white,
-      elevation: 2,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Icon(Icons.email),
-          ListTile(
-            title: Text(article.title),
-            subtitle: Text(article.description),
-          )
-        ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        color: Colors.white,
+        elevation: 2,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Icon(Icons.email),
+            ListTile(
+              title: Text(article.title),
+              subtitle: Text(article.description),
+            )
+          ],
+        ),
       ),
     );
   }

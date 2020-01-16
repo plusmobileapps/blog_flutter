@@ -29,8 +29,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var deviceData = MediaQuery.of(context);
+    var screenSize = deviceData.size;
+    var orientation = deviceData.orientation;
+    print('Width: ${screenSize.width} \n Height: ${screenSize.height}');
+    var columns = 1;
+    if(screenSize.width > 1080) {
+      columns = 3;
+    } else if(screenSize.width > 600) {
+      columns = 2;
+    } else {
+      //mobile
+      columns = 1;
+    }
     var user = Provider.of<User>(context);
-    print('User is: $user');
     bool isLoggedIn = user != null;
     Article article = Article(id: 'some id', description: 'This is an article description', minRead: '7 min read', title: "The amazing article title");
     return BlogScaffold(
@@ -38,10 +50,13 @@ class _MyHomePageState extends State<MyHomePage> {
       body: GridView.count(
         // Create a grid with 2 columns. If you change the scrollDirection to
         // horizontal, this produces 2 rows.
-        crossAxisCount: 2,
+        crossAxisCount: columns,
         // Generate 100 widgets that display their index in the List.
-        children: List.generate(100, (index) {
-          return HomeFeedCard(article: article,);
+        children: List.generate(20, (index) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: HomeFeedCard(article: article,),
+          );
         }),
       ),
     );
