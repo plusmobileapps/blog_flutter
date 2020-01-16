@@ -1,4 +1,5 @@
 import 'package:blog_flutter/model/user.dart';
+import 'package:blog_flutter/screens/about.dart';
 import 'package:blog_flutter/screens/flare_teddy.dart';
 import 'package:blog_flutter/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,12 @@ class _NavDrawerState extends State<NavDrawer> {
             child: Text('Flare Teddy Animation Demo'),
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => FlareTeddyWidget()));
+            },
+          ),
+          FlatButton(
+            child: Text('About'),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => AboutPage()));
             },
           )
         ],

@@ -15,42 +15,17 @@ class BlogScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var user = Provider.of<User>(context);
-    bool isLoggedIn = user != null;
-
     return Scaffold(
       drawer: NavDrawer(),
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(title),
-        actions: <Widget>[
-          FlatButton(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                if (!isLoggedIn) ...[
-                  Icon(Icons.person_outline),
-                  Text('Login/Sign Up')
-                ],
-                if (isLoggedIn) ...[
-                  Icon(Icons.person),
-                  Text('Hi ${user.displayName}')
-                ]
-              ],
-            ),
-            onPressed: () {
-              if (!isLoggedIn) {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => SignUp()));
-              } else {
-                AuthService().signOut();
-              }
-            },
-          ),
-        ],
+        title: Center(child: Text(title)),
       ),
-      body: body,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: body,
+      ),
     );
   }
 }

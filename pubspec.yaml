@@ -30,6 +30,8 @@ dependencies:
   google_sign_in: ^4.1.1
   firebase_dynamic_links: ^0.3.0
   flare_flutter: any
+  flutter_markdown: ^0.3.2
+
 
 
 

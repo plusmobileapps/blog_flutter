@@ -2,12 +2,8 @@ import 'package:blog_flutter/components/BlogScaffold.dart';
 import 'package:blog_flutter/components/home_feed_card.dart';
 import 'package:blog_flutter/model/article.dart';
 import 'package:blog_flutter/model/user.dart';
-import 'package:blog_flutter/components/nav_drawer.dart';
-import 'package:blog_flutter/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'SignUp.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -31,8 +27,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     var deviceData = MediaQuery.of(context);
     var screenSize = deviceData.size;
-    var orientation = deviceData.orientation;
-    print('Width: ${screenSize.width} \n Height: ${screenSize.height}');
     var columns = 1;
     if(screenSize.width > 1080) {
       columns = 3;

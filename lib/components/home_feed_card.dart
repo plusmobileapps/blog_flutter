@@ -1,4 +1,5 @@
 import 'package:blog_flutter/model/article.dart';
+import 'package:blog_flutter/screens/article_detail.dart';
 import 'package:flutter/material.dart';
 
 class HomeFeedCard extends StatelessWidget {
@@ -9,8 +10,7 @@ class HomeFeedCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
+    return GestureDetector(
       child: Card(
         color: Colors.white,
         elevation: 2,
@@ -25,6 +25,9 @@ class HomeFeedCard extends StatelessWidget {
           ],
         ),
       ),
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ArticleDetail()));
+      }
     );
   }
 
