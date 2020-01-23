@@ -26,7 +26,7 @@ class HomeFeedCard extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ArticleDetail()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => ArticleDetail(article)));
       }
     );
   }
