@@ -1,5 +1,6 @@
 import 'package:blog_flutter/model/article.dart';
 import 'package:blog_flutter/screens/article_detail.dart';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 class HomeFeedCard extends StatelessWidget {
@@ -17,7 +18,18 @@ class HomeFeedCard extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Icon(Icons.email),
+            Center(
+              child: Container(
+                width: double.infinity,
+                height: 300,
+                child: FlareActor(
+                  article.imageUrl,
+                  alignment: Alignment.center,
+                  fit: BoxFit.fitHeight,
+                  animation: "coding",
+                ),
+              ),
+            ),
             ListTile(
               title: Text(article.title),
               subtitle: Text(article.description),

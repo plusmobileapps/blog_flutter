@@ -28,9 +28,12 @@ class _MyHomePageState extends State<MyHomePage> {
     var deviceData = MediaQuery.of(context);
     var screenSize = deviceData.size;
     var columns = 1;
-    if (screenSize.width > 1080) {
+    /*24 is for notification bar on Android*/
+    final double itemHeight = (screenSize.height - kToolbarHeight - 24) / 2;
+    final double itemWidth = screenSize.width / 2;
+    if (screenSize.width > 1150) {
       columns = 3;
-    } else if (screenSize.width > 600) {
+    } else if (screenSize.width > 825) {
       columns = 2;
     } else {
       //mobile
@@ -44,7 +47,8 @@ class _MyHomePageState extends State<MyHomePage> {
           minRead: '10 min',
           title: 'How to make an Android application widget',
           url:
-              'https://raw.githubusercontent.com/plusmobileapps/dev-articles/master/Android%20App%20Widget.md'),
+              'https://raw.githubusercontent.com/plusmobileapps/dev-articles/master/Android%20App%20Widget.md',
+          imageUrl: 'assets/computeranimation.flr'),
       Article(
           id: '2',
           description:
@@ -52,21 +56,20 @@ class _MyHomePageState extends State<MyHomePage> {
           minRead: '5 min',
           title: 'SSH into a git remote repo',
           url:
-              'https://raw.githubusercontent.com/plusmobileapps/dev-articles/master/SSH.md')
+              'https://raw.githubusercontent.com/plusmobileapps/dev-articles/master/SSH.md',
+          imageUrl: 'assets/computeranimation.flr'),
     ];
     return BlogScaffold(
       title: 'Plus Mobile Apps',
       body: GridView.count(
+        shrinkWrap: true,
         // Create a grid with 2 columns. If you change the scrollDirection to
         // horizontal, this produces 2 rows.
         crossAxisCount: columns,
         // Generate 100 widgets that display their index in the List.
         children: List.generate(articles.length, (index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: HomeFeedCard(
-              article: articles[index],
-            ),
+          return HomeFeedCard(
+            article: articles[index],
           );
         }),
       ),
