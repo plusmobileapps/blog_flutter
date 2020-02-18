@@ -22,10 +22,7 @@ class BlogScaffold extends StatelessWidget {
         // the App.build method, and use it to set our appbar title.
         title: Center(child: Text(title)),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: body,
-      ),
+      body: body,
     );
   }
 }
