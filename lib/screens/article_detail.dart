@@ -44,10 +44,19 @@ class _ArticleDetailState extends State<ArticleDetail> {
         ),
       );
     } else {
-      body = Markdown(
-        data: _markdownBody,
-        selectable: true,
-        onTapLink: (link) => _launchURL(link),
+      body = SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 0),
+            child: Container(
+              constraints: BoxConstraints(maxWidth: 800),
+              child: MarkdownBody(
+                data: _markdownBody,
+                onTapLink: _launchURL,
+              ),
+            ),
+          ),
+        ),
       );
     }
     return BlogScaffold(
