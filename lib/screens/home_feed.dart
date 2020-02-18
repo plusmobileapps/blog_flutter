@@ -39,29 +39,10 @@ class _MyHomePageState extends State<MyHomePage> {
       //mobile
       columns = 1;
     }
-    var articles = [
-      Article(
-          id: '1',
-          description:
-              'Learn the basic fundamentals of how to make an android app widget',
-          minRead: '10 min',
-          title: 'How to make an Android application widget',
-          url:
-              'https://raw.githubusercontent.com/plusmobileapps/dev-articles/master/Android%20App%20Widget.md',
-          imageUrl: 'assets/computeranimation.flr'),
-      Article(
-          id: '2',
-          description:
-              'Learn how to use git without ever needing to login through the terminal',
-          minRead: '5 min',
-          title: 'SSH into a git remote repo',
-          url:
-              'https://raw.githubusercontent.com/plusmobileapps/dev-articles/master/SSH.md',
-          imageUrl: 'assets/computeranimation.flr'),
-    ];
-    return BlogScaffold(
-      title: 'Plus Mobile Apps',
-      body: GridView.count(
+    var articles = Provider.of<List<Article>>(context);
+    Widget body;
+    if(articles != null && articles.length > 0) {
+      body = GridView.count(
         shrinkWrap: true,
         // Create a grid with 2 columns. If you change the scrollDirection to
         // horizontal, this produces 2 rows.
@@ -72,7 +53,13 @@ class _MyHomePageState extends State<MyHomePage> {
             article: articles[index],
           );
         }),
-      ),
+      );
+    } else {
+      body = Text('Loading');
+    }
+    return BlogScaffold(
+      title: 'Plus Mobile Apps',
+      body: body,
     );
   }
 }

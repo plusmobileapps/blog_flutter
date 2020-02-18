@@ -1,9 +1,12 @@
+import 'package:blog_flutter/model/article_repository.dart';
 import 'package:blog_flutter/model/user.dart';
 import 'package:blog_flutter/screens/home_feed.dart';
 import 'package:blog_flutter/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flare_flutter/flare_actor.dart';
+
+import 'model/article.dart';
 
 void main() async {
   runApp(MyApp());
@@ -19,6 +22,13 @@ class MyApp extends StatelessWidget {
           value: AuthService().user,
           catchError: (context, error) {
             return null;
+          },
+        ),
+        StreamProvider.value(
+          value: ArticleRepository().getArticles(),
+          catchError: (context, error) {
+            print(error);
+            return List<Article>();
           },
         )
       ],
