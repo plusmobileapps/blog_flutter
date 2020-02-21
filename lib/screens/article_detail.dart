@@ -68,9 +68,15 @@ class _ArticleDetailState extends State<ArticleDetail> {
             padding: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 0),
             child: Container(
               constraints: BoxConstraints(maxWidth: 800),
-              child: MarkdownBody(
-                data: _article.body,
-                onTapLink: _launchURL,
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 16.0,),
+                  MarkdownBody(
+                    data: _article.body,
+                    onTapLink: _launchURL,
+                  ),
+                  SizedBox(height: 16.0,)
+                ],
               ),
             ),
           ),
