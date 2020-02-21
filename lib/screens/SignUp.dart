@@ -20,6 +20,7 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return BlogScaffold(
         title: 'Login/Sign up',
+        showNavDrawer: false,
         body: Center(
           child: Column(
             children: <Widget>[
@@ -111,7 +112,7 @@ class _SignUpState extends State<SignUp> {
                     print('error signing in');
                   } else {
                     print('signed in');
-                    print(result.uid);
+                    Navigator.pop(context);
                   }
                 },
               )

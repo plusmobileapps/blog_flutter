@@ -1,4 +1,5 @@
 import 'package:blog_flutter/model/user.dart';
+import 'package:blog_flutter/routing/route_names.dart';
 import 'package:blog_flutter/screens/about.dart';
 import 'package:blog_flutter/screens/flare_teddy.dart';
 import 'package:blog_flutter/services/auth.dart';
@@ -32,20 +33,20 @@ class _NavDrawerState extends State<NavDrawer> {
             RaisedButton(
               child: Text('Login/Sign Up'),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
+                Navigator.pushNamed(context, LoginRoute);
               },
             ),
           ],
           FlatButton(
             child: Text('Flare Teddy Animation Demo'),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => FlareTeddyWidget()));
+              Navigator.pushNamed(context, RiveDemoRoute);
             },
           ),
           FlatButton(
             child: Text('About'),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => AboutPage()));
+              Navigator.pushNamed(context, AboutRoute);
             },
           )
         ],

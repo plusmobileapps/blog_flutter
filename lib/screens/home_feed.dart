@@ -61,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
     return BlogScaffold(
       title: 'Plus Mobile Apps',
+      showNavDrawer: true,
       body: GridView.count(
         shrinkWrap: true,
         // Create a grid with 2 columns. If you change the scrollDirection to
