@@ -1,17 +1,22 @@
 import 'package:blog_flutter/model/article.dart';
 import 'package:blog_flutter/model/user.dart';
 import 'package:blog_flutter/routing/route_names.dart';
+import 'package:blog_flutter/routing/router.dart';
 import 'package:blog_flutter/screens/SignUp.dart';
 import 'package:blog_flutter/screens/about.dart';
 import 'package:blog_flutter/screens/article_detail.dart';
 import 'package:blog_flutter/screens/flare_teddy.dart';
 import 'package:blog_flutter/screens/home_feed.dart';
+import 'package:blog_flutter/screens/layout_template.dart';
 import 'package:blog_flutter/services/auth.dart';
+import 'package:blog_flutter/services/locator.dart';
+import 'package:blog_flutter/services/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flare_flutter/flare_actor.dart';
 
 void main() async {
+  setupLocator();
   runApp(MyApp());
 }
 
@@ -42,14 +47,10 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
+        builder: (context, child) => LayoutTemplate(child: child,),
+        navigatorKey: locator.get<NavigationService>().navigatorKey,
+        onGenerateRoute: generateRoute,
         initialRoute: HomeRoute,
-        routes: {
-          HomeRoute : (context) => MyHomePage(title: 'Plus Mobile Apps'),
-          AboutRoute : (context) => AboutPage(),
-          ArticleDetailRoute : (context) => ArticleDetailPage(),
-          RiveDemoRoute : (context) => FlareTeddyWidget(),
-          LoginRoute : (context) => SignUp()
-        },
       ),
     );
   }
