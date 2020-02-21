@@ -1,6 +1,8 @@
 import 'package:blog_flutter/model/article.dart';
 import 'package:blog_flutter/routing/route_names.dart';
 import 'package:blog_flutter/screens/article_detail.dart';
+import 'package:blog_flutter/services/locator.dart';
+import 'package:blog_flutter/services/navigator.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +41,7 @@ class HomeFeedCard extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.of(context).pushNamed(ArticleDetailRoute, arguments: article);
+        locator.get<NavigationService>().navigateTo(ArticleDetailRoute, queryParams: {'id' : article.id});
       }
     );
   }

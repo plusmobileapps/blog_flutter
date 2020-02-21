@@ -1,5 +1,7 @@
 import 'package:blog_flutter/components/BlogScaffold.dart';
 import 'package:blog_flutter/model/article.dart';
+import 'package:blog_flutter/services/article_repository.dart';
+import 'package:blog_flutter/services/locator.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -8,28 +10,32 @@ import 'package:url_launcher/url_launcher.dart';
 
 class ArticleDetailPage extends StatelessWidget {
 
+  final String id;
+
+  const ArticleDetailPage({Key key, this.id}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-      final Article article = ModalRoute.of(context).settings.arguments;
-      return ArticleDetail(article);
+      return ArticleDetail(id);
   }
 }
 
 class ArticleDetail extends StatefulWidget {
-  final Article _article;
+  final String articleId;
 
-  ArticleDetail(this._article);
+  ArticleDetail(this.articleId);
 
   @override
-  _ArticleDetailState createState() => _ArticleDetailState(_article);
+  _ArticleDetailState createState() => _ArticleDetailState(articleId);
 }
 
 class _ArticleDetailState extends State<ArticleDetail> {
+  final String _articleId;
   Article _article;
   String _markdownBody = '';
   bool _loading = true;
 
-  _ArticleDetailState(this._article);
+  _ArticleDetailState(this._articleId);
 
   @override
   void initState() {
@@ -63,7 +69,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
             child: Container(
               constraints: BoxConstraints(maxWidth: 800),
               child: MarkdownBody(
-                data: _markdownBody,
+                data: _article.body,
                 onTapLink: _launchURL,
               ),
             ),
@@ -79,14 +85,19 @@ class _ArticleDetailState extends State<ArticleDetail> {
   }
 
   _loadMarkDown() async {
-    var response = await http.get(_article.url);
-    await new Future.delayed(const Duration(seconds: 1));
-    //loading a local json file
-//    String config = await rootBundle.loadString('assets/SSH.md');
+    var article = locator.get<ArticleRepository>().getArticle(_articleId);
     setState(() {
       _loading = false;
-      _markdownBody = response.body;
+      _article = article;
     });
+//    var response = await http.get(_article.url);
+//    await new Future.delayed(const Duration(seconds: 1));
+//    //loading a local json file
+////    String config = await rootBundle.loadString('assets/SSH.md');
+//    setState(() {
+//      _loading = false;
+//      _markdownBody = response.body;
+//    });
   }
 
   _launchURL(String url) async {

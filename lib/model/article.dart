@@ -6,7 +6,8 @@ class Article {
   final String minRead;
   final String url;
   final String imageUrl;
+  final String body;
 
-  Article({this.id, this.title, this.description, this.minRead, this.url, this.imageUrl});
+  Article({this.id, this.title, this.description, this.minRead, this.url, this.imageUrl, this.body});
 
 }

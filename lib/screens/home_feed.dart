@@ -2,6 +2,8 @@ import 'package:blog_flutter/components/BlogScaffold.dart';
 import 'package:blog_flutter/components/home_feed_card.dart';
 import 'package:blog_flutter/model/article.dart';
 import 'package:blog_flutter/model/user.dart';
+import 'package:blog_flutter/services/article_repository.dart';
+import 'package:blog_flutter/services/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,26 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
       //mobile
       columns = 1;
     }
-    var articles = [
-      Article(
-          id: '1',
-          description:
-              'Learn the basic fundamentals of how to make an android app widget',
-          minRead: '10 min',
-          title: 'How to make an Android application widget',
-          url:
-              'https://raw.githubusercontent.com/plusmobileapps/dev-articles/master/Android%20App%20Widget.md',
-          imageUrl: 'assets/computeranimation.flr'),
-      Article(
-          id: '2',
-          description:
-              'Learn how to use git without ever needing to login through the terminal',
-          minRead: '5 min',
-          title: 'SSH into a git remote repo',
-          url:
-              'https://raw.githubusercontent.com/plusmobileapps/dev-articles/master/SSH.md',
-          imageUrl: 'assets/computeranimation.flr'),
-    ];
+    var articles = locator.get<ArticleRepository>().getArticles();
     return BlogScaffold(
       title: 'Plus Mobile Apps',
       showNavDrawer: true,
