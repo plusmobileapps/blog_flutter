@@ -1,4 +1,5 @@
 import 'package:blog_flutter/model/article.dart';
+import 'package:blog_flutter/routing/route_names.dart';
 import 'package:blog_flutter/screens/article_detail.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class HomeFeedCard extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ArticleDetail(article)));
+        Navigator.of(context).pushNamed(ArticleDetailRoute, arguments: article);
       }
     );
   }

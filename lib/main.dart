@@ -1,4 +1,10 @@
+import 'package:blog_flutter/model/article.dart';
 import 'package:blog_flutter/model/user.dart';
+import 'package:blog_flutter/routing/route_names.dart';
+import 'package:blog_flutter/screens/SignUp.dart';
+import 'package:blog_flutter/screens/about.dart';
+import 'package:blog_flutter/screens/article_detail.dart';
+import 'package:blog_flutter/screens/flare_teddy.dart';
 import 'package:blog_flutter/screens/home_feed.dart';
 import 'package:blog_flutter/services/auth.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +42,14 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: MyHomePage(title: 'Plus Mobile Apps'),
+        initialRoute: HomeRoute,
+        routes: {
+          HomeRoute : (context) => MyHomePage(title: 'Plus Mobile Apps'),
+          AboutRoute : (context) => AboutPage(),
+          ArticleDetailRoute : (context) => ArticleDetailPage(),
+          RiveDemoRoute : (context) => FlareTeddyWidget(),
+          LoginRoute : (context) => SignUp()
+        },
       ),
     );
   }

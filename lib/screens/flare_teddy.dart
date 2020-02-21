@@ -12,6 +12,7 @@ class FlareTeddyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlogScaffold(
       title: 'Flare Flutter Animation Demo - Teddy',
+      showNavDrawer: false,
       body: Column(
         children: <Widget>[
           Center(

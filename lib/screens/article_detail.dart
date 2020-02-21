@@ -6,6 +6,15 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
+class ArticleDetailPage extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+      final Article article = ModalRoute.of(context).settings.arguments;
+      return ArticleDetail(article);
+  }
+}
+
 class ArticleDetail extends StatefulWidget {
   final Article _article;
 
@@ -29,6 +38,9 @@ class _ArticleDetailState extends State<ArticleDetail> {
 
   @override
   Widget build(BuildContext context) {
+    if(_article == null) {
+      Navigator.pop(context);
+    }
     Widget body;
     if (_loading) {
       body = Center(
@@ -62,6 +74,7 @@ class _ArticleDetailState extends State<ArticleDetail> {
     return BlogScaffold(
       title: 'Article Detail',
       body: body,
+      showNavDrawer: false,
     );
   }
 

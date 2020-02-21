@@ -18,6 +18,7 @@ class _AboutPageState extends State<AboutPage> {
   Widget build(BuildContext context) {
     return BlogScaffold(
       title: 'About Plus Mobile Apps',
+      showNavDrawer: false,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.max,
